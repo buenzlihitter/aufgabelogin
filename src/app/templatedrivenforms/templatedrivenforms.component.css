@@ -1,0 +1,31 @@
+.form-group {
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-actions {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Style for the "anmelden" button - flat with round corners */
+.form-actions button[mat-flat-button] {
+  border-radius: 20px;
+  padding: 8px 24px;
+  transition: all 0.3s ease;
+  background-color: deepskyblue;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}

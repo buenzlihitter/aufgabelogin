@@ -1,1 +1,83 @@
-<p>reactiveforms works!</p>
+<h2>Login (Reactive Forms)</h2>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>E-Mail</mat-label>
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+        required
+        placeholder="beispiel@domain.com"
+      >
+      <mat-hint>Bitte geben Sie Ihre E-Mail-Adresse ein</mat-hint>
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="clearField('email')"
+        [disabled]="!loginForm.get('email')?.value"
+        [attr.aria-label]="'E-Mail löschen'"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+      <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        <span *ngIf="loginForm.get('email')?.errors?.['required']">
+          Bitte geben Sie eine E-Mail-Adresse ein
+        </span>
+        <span *ngIf="loginForm.get('email')?.errors?.['email']">
+          Bitte geben Sie eine gültige E-Mail-Adresse ein
+        </span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Passwort eingeben</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        formControlName="password"
+        required
+        placeholder="Ihr Passwort"
+      />
+      <mat-hint>Mind. 14 Zeichen</mat-hint>
+      <mat-error *ngIf="loginForm.get('password')?.touched">
+        <span *ngIf="loginForm.get('password')?.errors?.['required']">
+          Bitte geben Sie ein Passwort ein
+        </span>
+        <span *ngIf="loginForm.get('password')?.errors?.['minlength']">
+          Das Passwort muss mindestens 14 Zeichen lang sein
+        </span>
+      </mat-error>
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="togglePasswordVisibility($event)"
+        [attr.aria-label]="'Passwort anzeigen/verstecken'"
+        [attr.aria-pressed]="!hidePassword"
+      >
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="clearField('password')"
+        [disabled]="!loginForm.get('password')?.value"
+        [attr.aria-label]="'Passwort löschen'"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="form-actions">
+    <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid">
+      Anmelden
+    </button>
+  </div>
+</form>
